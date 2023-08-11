@@ -1,0 +1,126 @@
+use("db_campus_alquiler");
+db.getCollection("Contrato").aggregate([
+     {
+         $match: {ID:{$eq: 1}}
+     },
+    {
+      $lookup: {
+        from: "Cliente",
+        localField: "ID_Cliente",
+        foreignField: "ID",
+        as: "fk"
+      }
+    },
+     {
+         $unset: 'fk'
+     },
+    {
+        $project: {
+          Fecha_Inicio: 0,
+          Fecha_Fin: 0
+        }
+    }
+  ]);
+
+
+/**** */
+use("db_campus_alquiler");
+db.getCollection("Cliente").find({});
+
+use("db_campus_alquiler");
+db.getCollection("Automovil").find({});
+
+use("db_campus_alquiler");
+db.Contrato.aggregate([
+    {
+        $match: { Tipo: "Alquiler", Estado: "Disponible" }
+    },
+    {
+        $lookup: {
+            from: "Automovil",
+            localField: "ID_Automovil",
+            foreignField: "_id",
+            as: "automovil"
+        }
+    },
+    {
+        $unwind: "$automovil"
+    },
+    {
+        $project: {
+            _id: "$automovil._id",
+            Marca: "$automovil.Marca",
+            Modelo: "$automovil.Modelo",
+            Anio: "$automovil.Anio",
+            Tipo: "$automovil.Tipo",
+            Capacidad: "$automovil.Capacidad",
+            Precio_Diario: "$automovil.Precio_Diario"
+        }
+    }
+]);
+
+/**Listar todos los alquileres activos junto con los datos de los
+clientes relacionados. */
+
+use("db_campus_alquiler");
+db.Contrato.aggregate([
+    {
+        $match:{Tipo:"Alquiler", Estado:"Activo"}
+    },
+    {
+        $lookup: {
+          from: "Cliente",
+          localField: "ID_Cliente",
+          foreignField: "_id",
+          as: "cliente"
+        }
+    },
+    {
+
+        $unwind: "$cliente"
+    },
+    {
+        $project: {
+          id:"Cliente._id",
+          apellido:"Cliente.Apellido",
+          DNI:"Cliente.DNI",
+          Direccion:"Cliente.Direccion",
+          Telefono:"Cliente.Telefono",
+          Email:"Cliente.Email"
+
+        }
+    }
+]);
+
+use("db_campus_alquiler");
+db.getCollection("Contrato").aggregate([
+    {
+        $match: {ID:{$eq:1} }
+    },{
+        $lookup: {
+          from: "Cliente",
+          localField: "ID_Cliente",
+          foreignField: "_id",
+          as: "fk"
+        }
+    },
+     {
+         $unwind: "fk"
+     },
+    {
+        $project: {
+          Fecha_Inicio:0,
+          Fecha_Fin:0
+        }
+    },{
+        $group:{
+            _id:"$ID",
+            fieldN:{
+                Tipo:{$first:"$ID_Cliente"},
+                fk:{$push:"$fk"}
+            }
+        }
+    }
+]);
+
+

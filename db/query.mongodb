@@ -1,0 +1,579 @@
+use("db_campus_alquiler");
+db.createCollection("Cliente",{
+    capped:true,
+    size:1900,
+    max:6,
+    validator:{
+        $jsonSchema:{
+            bsonType:'object',
+            additionalProperties:false,
+            required:['Nombre','Apellido','DNI'],
+            properties:{
+                _id: {
+                    bsonType:'objectId'
+                },
+                Nombre:{
+                    bsonType:'string',
+                    description:'El nombre debe ser obligatorio y debe ser un string'
+
+                },
+                Apellido:{
+                    bsonType:'string',
+                    description:'El nombre debe ser obligatorio y debe ser un string'
+                },
+                DNI:{
+                    bsonType:'string',
+                    description:'El DNI debe ser obligatorio y debe ser un string'
+                },
+                Direccion:{
+                    bsonType:'string',
+                    description:'la direccion debe ser un string'
+                },
+                Telefono:{
+                bsonType:'string',
+                description:'el telefono debe ser string'
+                },
+                Email:{
+                    bsonType:'string',
+                    description:'el email debe ser un string'
+                }
+
+
+            }
+        }
+    }
+});
+
+use("db_campus_alquiler");
+db.Cliente.insertMany([
+    { 
+        Nombre: 'Juan',
+        Apellido: 'Perez',
+        DNI: '12345678',
+        Direccion: 'Calle 123',
+        Telefono: '11111111', 
+        Email: 'juan@example.com'},
+    {
+     
+        Nombre: 'Maria', 
+        Apellido: 'Lopez', 
+        DNI: '87654321', 
+        Direccion: 'Avenida 456', 
+        Telefono: '22222222', 
+        Email: 'maria@example.com'},
+    { 
+       
+        Nombre: 'Pedro', 
+        Apellido: 'Gonzalez', 
+        DNI: '56789012', 
+        Direccion: 'Plaza 789', 
+        Telefono: '33333333', 
+        Email: 'pedro@example.com'},
+    { 
+       
+        Nombre: 'Laura', 
+        Apellido: 'Martinez', 
+        DNI: '09876543', 
+        Direccion: 'Ruta 101', 
+        Telefono: '44444444', 
+        Email: 'laura@example.com'},
+    { 
+       
+        Nombre: 'Carlos', 
+        Apellido: 'Gomez', 
+        DNI: '43210987', 
+        Direccion: 'Calle 987', 
+        Telefono: '55555555', 
+        Email: 'carlos@example.com'}
+]);
+
+
+use("db_campus_alquiler");
+db.createCollection("Automovil",{
+    capped:true,
+    size:1900,
+    max:6,
+    validator:{
+        $jsonSchema:{
+            bsonType:'object',
+            additionalProperties:false,
+            required:['Marca','Modelo','Anio'],
+            properties:{
+               
+                _id: {
+                    bsonType:'objectId',
+                    
+                },
+                Marca:{
+                    bsonType:'string',
+                    description:'La Marca debe ser obligatorio y debe ser un string'
+
+                },
+                Modelo:{
+                    bsonType:'string',
+                    description:'El Modelo debe ser obligatorio y debe ser un string'
+                },
+                Anio:{
+                    bsonType:'int',
+                    description:'El Año debe ser obligatorio y debe ser un int'
+                },
+                Tipo:{
+                    bsonType:'string',
+                    description:'El Tipo debe ser un string'
+                },
+                Capacidad:{
+                bsonType:'int',
+                description:'la Capacidad debe ser un dato int'
+                },
+               
+                Precio_Diario:{
+                    bsonType:'int',
+                    description:'el precio diario debe ser un string'
+
+                }
+            }
+        }
+    }
+});
+use("db_campus_alquiler");
+db.Automovil.insertMany([
+    { 
+        
+        Marca: 'Toyota', 
+        Modelo: 'Corolla', 
+        Anio: 2021, 
+        Tipo: 'Sedan', 
+        Capacidad: 5, 
+        Precio_Diario: 50.00},
+    { 
+         
+        Marca: 'Honda', 
+        Modelo: 'Civic',
+        Anio: 2020, 
+        Tipo: 'Sedan', 
+        Capacidad: 5, 
+        Precio_Diario: 45.00},
+    { 
+        
+        Marca: 'Ford', 
+        Modelo: 'Explorer', 
+        Anio: 2019, 
+        Tipo: 'SUV', 
+        Capacidad: 7, 
+        Precio_Diario: 60.00},
+    { 
+        
+        Marca: 'Chevrolet', 
+        Modelo: 'Equinox', 
+        Anio: 2022, 
+        Tipo: 'SUV', 
+        Capacidad: 5, 
+        Precio_Diario: 55.00},
+    { 
+        
+        Marca: 'Nissan', 
+        Modelo: 'Sentra', 
+        Anio: 2022, 
+        Tipo: 'Sedan', 
+        Capacidad: 4, 
+        Precio_Diario: 48.00}
+]);
+
+
+
+
+use("db_campus_alquiler");
+db.createCollection("Sucursal",{
+    capped:true,
+    size:1900,
+    max:6,
+    validator:{
+        $jsonSchema:{
+            bsonType:'object',
+            additionalProperties:false,
+            required:['Nombre','Direccion'],
+            properties:{
+                
+                _id: {
+                    bsonType:'objectId',
+                    description:'El _id es generado automáticamente por MongoDB'
+                },
+                Nombre:{
+                    bsonType:'string',
+                    description:'El Nombre debe ser obligatorio y debe ser un string'
+
+                },
+                Direccion:{
+                    bsonType:'string',
+                    description:'La Direccion debe ser obligatorio y debe ser un string'
+                },
+                Telefono:{
+                    bsonType:'string',
+                    description:'ElTelefono debe ser un string'
+                }
+
+                
+
+            }
+        }
+    }
+});
+
+
+use("db_campus_alquiler");
+db.Sucursal.insertMany([
+    { 
+        
+        Nombre: 'Sucursal A', 
+        Direccion: 'Calle Principal 123', 
+        Telefono: '1111111111'},
+    { 
+        
+        Nombre: 'Sucursal B', 
+        Direccion: 'Avenida Central 456', 
+        Telefono: '2222222222'},
+    { 
+        
+        Nombre: 'Sucursal C',
+        Direccion: 'Plaza Principal 789', 
+        Telefono: '3333333333'},
+    { 
+         
+        Nombre: 'Sucursal D', 
+        Direccion: 'Ruta Secundaria 101', 
+        Telefono: '4444444444'},
+    { 
+        
+        Nombre: 'Sucursal E', 
+        Direccion: 'Carretera Principal 987', 
+        Telefono: '5555555555'}
+]);
+
+
+  
+// Colección: Contrato (fusion de Alquiler y Reserva)
+
+
+use("db_campus_alquiler");
+db.createCollection("Contrato",{
+    capped:true,
+    size:1900,
+    max:6,
+    validator:{
+        $jsonSchema:{
+            bsonType:'object',
+            additionalProperties:false,
+            required:['ID_Cliente','ID_Automovil'],
+            properties:{
+                _id: {
+                    bsonType:'objectId',
+                    
+                },
+                ID_Cliente:{
+                    bsonType:'int',
+                    description:'El ID de Cliente debe ser obligatorio y debe ser un dato int'
+
+                },
+                ID_Automovil:{
+                    bsonType:'int',
+                    description:'El ID de Automovil debe ser obligatorio y debe ser un dato int'
+                },
+                Fecha_Inicio:{
+                    bsonType:'string',
+                    description:'la Fecha de Inicio debe ser un dato tipo string'
+                },
+                Fecha_Fin:{
+                    bsonType:'string',
+                    description:'la Fecha de fin debe ser un dato tipo string'
+                },
+                Costo_Total:{
+                    bsonType:'number',
+                    description:'el costo total debe ser int'
+                },
+                Estado:{
+                    bsonType:'string',
+                    description:'el estado debe ser string'
+                },
+                Tipo: {
+                    bsonType:'string',
+                    description:'El tipo debe ser string'
+
+                }
+
+            }
+        }
+    }
+});
+
+use("db_campus_alquiler");
+db.Contrato.insertMany([
+    { 
+         
+        ID_Cliente: 1, 
+        ID_Automovil: 3, 
+        Fecha_Inicio:'2023-07-01', 
+        Fecha_Fin: '2023-07-05', 
+        Costo_Total: 240.00, 
+        Estado: 'Activo', 
+        Tipo: 'Alquiler'},
+    { 
+        
+        ID_Cliente: 2, 
+        ID_Automovil: 4, 
+        Fecha_Inicio: '2023-07-02', 
+        Fecha_Fin: '2023-07-07', 
+        Costo_Total: 275.00, 
+        Estado: 'Disponible', 
+        Tipo: 'Alquiler'},
+    { 
+        
+        ID_Cliente: 3, 
+        ID_Automovil: 1, 
+        Fecha_Inicio: '2023-07-03', 
+        Fecha_Fin: '2023-07-06', 
+        Costo_Total: 150.00, 
+        Estado: 'Activo', 
+        Tipo: 'Alquiler'},
+    { 
+        
+        ID_Cliente: 4, 
+        ID_Automovil: 5, 
+        Fecha_Inicio: '2023-07-04', 
+        Fecha_Fin: '2023-07-08', 
+        Costo_Total: 192.00, 
+        Estado: 'Activo', 
+        Tipo: 'Alquiler'},
+    { 
+         
+        ID_Cliente: 5, 
+        ID_Automovil: 2, 
+        Fecha_Inicio: '2023-07-05', 
+        Fecha_Fin: '2023-07-09', 
+        Costo_Total: 225.00, 
+        Estado: 'Disponible', 
+        Tipo: 'Alquiler'},
+    { 
+        
+        ID_Cliente: 2, 
+        ID_Automovil: 1, 
+        Fecha_Inicio: '2023-07-06', 
+        Fecha_Fin: '2023-07-10', 
+        Estado: 'Pendiente', 
+        Tipo: 'Reserva'},
+    { 
+        
+        
+        ID_Cliente: 3, 
+        ID_Automovil: 3, 
+        Fecha_Inicio: '2023-07-07', 
+        Fecha_Fin: '2023-07-12', 
+        Estado: 'Pendiente', 
+        Tipo: 'Reserva'},
+    { 
+        
+        ID_Cliente: 4, 
+        ID_Automovil: 2, 
+        Fecha_Inicio: '2023-07-08', 
+        Fecha_Fin: '2023-07-14', 
+        Estado: 'Pendiente', 
+        Tipo: 'Reserva'},
+    { 
+        ID_Cliente: 5, 
+        ID_Automovil: 4, 
+        Fecha_Inicio: '2023-07-09', 
+        Fecha_Fin: '2023-07-15', 
+        Estado: 'Pendiente', 
+        Tipo: 'Reserva'},
+    { 
+        ID_Cliente: 1, 
+        ID_Automovil: 5, 
+        Fecha_Inicio: '2023-07-10', 
+        Fecha_Fin: '2023-07-16', 
+        Estado: 'Pendiente', 
+        Tipo: 'Reserva'},
+]);
+
+//Registro(Union de ambos registros)
+
+
+use("db_campus_alquiler");
+db.createCollection("Registro",{
+    capped:true,
+    size:1900,
+    max:15,
+    validator:{
+        $jsonSchema:{
+            bsonType:'object',
+            additionalProperties:false,
+            required:['ID_Contrato','ID_Empleado'],
+            properties:{
+                _id: {
+                    bsonType:'objectId'
+                },
+                ID_Contrato:{
+                    bsonType:'int',
+                    description:'El ID de Contrato debe ser obligatorio y debe ser un dato int'
+                },
+                ID_Empleado:{
+                    bsonType:'int',
+                    description:'El ID de Empleado debe ser obligatorio y debe ser un dato int'
+                },
+                Fecha_Entrega:{
+                    bsonType:'string',
+                    description:'El Fecha_Entrega debe ser obligatorio y debe ser un dato string'
+                },
+                Combustible_Entregado:{
+                    bsonType:'number',
+                    description:'El Combustible Entregado debe ser un dato int'
+                },
+                Kilometraje_Entregado:{
+                    bsonType:'number',
+                    description:'El Kilometraje Entregado debe ser un dato tipo int'
+                },
+                Tipo_Registro:{
+                    bsonType:'string',
+                    description:'el Tipo Registro debe ser string'
+                }
+
+            }
+        }
+    }
+});
+use("db_campus_alquiler");
+db.Registro.insertMany([
+    { 
+        ID_Contrato: 1, 
+        ID_Empleado: 3, 
+        Fecha_Entrega: '2023-07-05', 
+        Combustible_Entregado: 40.00, 
+        Kilometraje_Entregado: 2000, 
+        Tipo_Registro: 'Entrega'},
+    { 
+        ID_Contrato: 2, 
+        ID_Empleado: 4, 
+        Fecha_Entrega: '2023-07-07', 
+        Combustible_Entregado: 30.00, 
+        Kilometraje_Entregado: 1800, 
+        Tipo_Registro: 'Entrega'},
+    { 
+        ID_Contrato: 3, 
+        ID_Empleado: 1, 
+        Fecha_Entrega: '2023-07-06', 
+        Combustible_Entregado: 45.00, 
+        Kilometraje_Entregado: 2200, 
+        Tipo_Registro: 'Entrega'},
+    { 
+        ID_Contrato: 4, 
+        ID_Empleado: 5, 
+        Fecha_Entrega: '2023-07-08', 
+        Combustible_Entregado: 50.00, 
+        Kilometraje_Entregado: 2400, 
+        Tipo_Registro: 'Entrega'},
+    { 
+        ID_Contrato: 5, 
+        ID_Empleado: 2, 
+        Fecha_Entrega: '2023-07-09', 
+        Combustible_Entregado: 35.00, 
+        Kilometraje_Entregado: 1900, 
+        Tipo_Registro: 'Entrega'}
+]);
+
+use("db_campus_alquiler");
+db.createCollection('empleado',{
+capped:true,
+size:800,
+max:6,
+validator:{
+    $jsonSchema:{
+        bsonType:'object',
+        additionalProperties:false,
+        required:['ID_Empleado','Nombre'],
+        properties:{
+            _id: {
+                bsonType:'objectId',
+                description:'El _id es generado automáticamente por MongoDB'
+            },
+          
+            ID_Empleado:{
+                bsonType:'int',
+                description:'El ID de Empleado debe ser obligatorio y debe ser un dato int'
+            },
+            Nombre:{
+                bsonType:'string',
+                description:'El nombre debe ser obligatorio y debe ser string'
+            },
+            Apellido:{
+                bsonType:'string',
+                description:'El apellido  debe ser un dato string'
+            },
+            DNI:{
+                bsonType:'string',
+                description:'El DNI debe ser un dato tipo string'
+            },
+            Direccion:{
+                bsonType:'string',
+                description:'la Direccion debe ser string'
+            },
+            Telefono:{
+                bsonType:'string',
+                description:'el Telefono debe ser string'
+            },
+            Cargo:{
+                bsonType:'string',
+                description:'El cargo debe ser string '
+            }
+
+        }
+    }
+}
+});
+use("db_campus_alquiler");
+db.empleado.insertMany([
+    {
+    ID_Empleado: 1,    
+    Nombre:'Ana',
+    Apellido:'Gomez',
+    DNI:'123456789',
+    Direccion:'Calle 111',
+    Telefono:'1111111111', 
+    Cargo:'Gerente'},
+
+    {
+        ID_Empleado: 2,    
+        Nombre:'Luis',     
+        Apellido:'Rodriguez',
+        DNI:'987654321',
+        Direccion:'Avenida 222',
+        Telefono:'2222222222', 
+        Cargo:'Asistente'},
+
+     {
+         ID_Empleado: 3,    
+         Nombre:'Elena',         
+         Apellido:'Fernandez',
+         DNI:'456789012',
+         Direccion:'Plaza 333',
+         Telefono:'3333333333',
+         Cargo:'Vendedor', },
+    {
+       ID_Empleado: 4,    
+       Nombre:'Mario',              
+       Apellido:'Torres',
+       DNI:'210987654',
+       Direccion:'Ruta 444',
+       Telefono:'4444444444',
+       Cargo:'Recepcionista' },
+    
+    {
+        ID_Empleado: 5,    
+        Nombre:'Carlos',                
+        Apellido:'Hernandez', 
+        DNI:'543210987',
+        Direccion:'Carretera 555',
+        Telefono:'5555555555',
+        Cargo:'Chofer' }     
+
+
+
+])
+
