@@ -14,4 +14,4 @@ appCliente.get("/",limitGrt(),async(req,res)=>{
     res.send(resul);
     
 });
-export default appCliente;
+export default appCliente;      

@@ -31,15 +31,15 @@ use("db_campus_alquiler");
 db.getCollection("Automovil").find({});
 
 use("db_campus_alquiler");
-db.Contrato.aggregate([
+db.Automovil.aggregate([
     {
         $match: { Tipo: "Alquiler", Estado: "Disponible" }
     },
     {
         $lookup: {
-            from: "Automovil",
+            from: "Contrato",
             localField: "ID_Automovil",
-            foreignField: "_id",
+            foreignField: "ID_Automovil",
             as: "automovil"
         }
     },
@@ -48,13 +48,13 @@ db.Contrato.aggregate([
     },
     {
         $project: {
-            _id: "$automovil._id",
-            Marca: "$automovil.Marca",
-            Modelo: "$automovil.Modelo",
-            Anio: "$automovil.Anio",
-            Tipo: "$automovil.Tipo",
-            Capacidad: "$automovil.Capacidad",
-            Precio_Diario: "$automovil.Precio_Diario"
+            _id: 1,
+            Marca: 1,
+            Modelo: 1,
+            Anio:1,
+            Tipo:1,
+            Capacidad:1,
+            Precio_Diario:1
         }
     }
 ]);
@@ -123,4 +123,66 @@ db.getCollection("Contrato").aggregate([
     }
 ]);
 
+use("db_campus_alquiler");
+db.Automovil.find({
+    ID_Automovil: {
+        $nin: db.Contrato.find({ Estado: "Activo", Tipo: "Alquiler" }).map(contrato => contrato.ID_Automovil)
+    }
+});
+
+use("db_campus_alquiler");
+
+db.Contrato.aggregate([
+    {
+        $lookup: {
+            from: "Automovil",
+            localField: "ID_Automovil",
+            foreignField: "ID_Automovil",
+            as: "Autos"
+        }
+    },
+    {
+        $match: {
+            "Estado":{$eq: "Disponible"},
+            "Tipo": {$eq: "Alquiler"}
+        }
+    },
+    {
+        $project: {
+            "Autos": 1
+        }
+    }
+]);
+
+
+use("db_campus_alquiler");
+
+db.Automovil.aggregate([
+    {
+        $lookup: {
+            from: "Contrato",
+            localField: "ID_Automovil",
+            foreignField: "ID_Automovil",
+            as: "contratos"
+        }
+    },
+    {
+        $match: {
+            "contratos.Estado": "Disponible",
+            "contratos.Tipo": "Alquiler"
+        }
+    },
+    {
+        $project: {
+            _id:0,
+            ID_Automovil: 1,
+            Marca: 1,
+            Modelo: 1,
+            Anio: 1,
+            Tipo: 1,
+            Capacidad: 1,
+            Precio_Diario: 1
+        }
+    }
+]);
 
