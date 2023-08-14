@@ -6,7 +6,7 @@ db.getCollection("Contrato").aggregate([
     {
       $lookup: {
         from: "Cliente",
-        localField: "ID_Cliente",
+        localField: "_id",
         foreignField: "ID",
         as: "fk"
       }

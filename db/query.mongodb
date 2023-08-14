@@ -12,6 +12,7 @@ db.createCollection("Cliente",{
                 _id: {
                     bsonType:'objectId'
                 },
+                
                 Nombre:{
                     bsonType:'string',
                     description:'El nombre debe ser obligatorio y debe ser un string'
