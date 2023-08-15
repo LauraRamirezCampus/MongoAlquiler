@@ -12,7 +12,10 @@ db.createCollection("Cliente",{
                 _id: {
                     bsonType:'objectId'
                 },
-
+                ID_Cliente:{
+                    bsonType:'int',
+                    description:'el id de cliente debe ser int'
+                },
                 Nombre:{
                     bsonType:'string',
                     description:'El nombre debe ser obligatorio y debe ser un string'
@@ -48,6 +51,7 @@ db.createCollection("Cliente",{
 use("db_campus_alquiler");
 db.Cliente.insertMany([
     { 
+        ID_Cliente:1,
         Nombre: 'Juan',
         Apellido: 'Perez',
         DNI: '12345678',
@@ -55,7 +59,7 @@ db.Cliente.insertMany([
         Telefono: '11111111', 
         Email: 'juan@example.com'},
     {
-     
+        ID_Cliente:2,
         Nombre: 'Maria', 
         Apellido: 'Lopez', 
         DNI: '87654321', 
@@ -63,7 +67,7 @@ db.Cliente.insertMany([
         Telefono: '22222222', 
         Email: 'maria@example.com'},
     { 
-       
+        ID_Cliente:3,
         Nombre: 'Pedro', 
         Apellido: 'Gonzalez', 
         DNI: '56789012', 
@@ -71,7 +75,7 @@ db.Cliente.insertMany([
         Telefono: '33333333', 
         Email: 'pedro@example.com'},
     { 
-       
+        ID_Cliente:4,
         Nombre: 'Laura', 
         Apellido: 'Martinez', 
         DNI: '09876543', 
@@ -79,7 +83,7 @@ db.Cliente.insertMany([
         Telefono: '44444444', 
         Email: 'laura@example.com'},
     { 
-       
+        ID_Cliente:5,
         Nombre: 'Carlos', 
         Apellido: 'Gomez', 
         DNI: '43210987', 
