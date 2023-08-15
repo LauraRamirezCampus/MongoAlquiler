@@ -260,7 +260,7 @@ db.Sucursal.insertMany([
 
 
   
-// Colección: Contrato (fusion de Alquiler y Reserva)
+
 
 
 use("db_campus_alquiler");
@@ -278,6 +278,12 @@ db.createCollection("Contrato",{
                     bsonType:'objectId',
                     
                 },
+                
+                ID:{
+                    bsonType:'int',
+                    description:'el id debe ser int'
+                },
+                
                 ID_Cliente:{
                     bsonType:'int',
                     description:'El ID de Cliente debe ser obligatorio y debe ser un dato int'
@@ -317,7 +323,7 @@ db.createCollection("Contrato",{
 use("db_campus_alquiler");
 db.Contrato.insertMany([
     { 
-         
+        ID:1,
         ID_Cliente: 1, 
         ID_Automovil: 3, 
         Fecha_Inicio:'2023-07-01', 
@@ -326,7 +332,7 @@ db.Contrato.insertMany([
         Estado: 'Activo', 
         Tipo: 'Alquiler'},
     { 
-        
+        ID:2,
         ID_Cliente: 2, 
         ID_Automovil: 4, 
         Fecha_Inicio: '2023-07-02', 
@@ -335,7 +341,7 @@ db.Contrato.insertMany([
         Estado: 'Disponible', 
         Tipo: 'Alquiler'},
     { 
-        
+        ID:3,
         ID_Cliente: 3, 
         ID_Automovil: 1, 
         Fecha_Inicio: '2023-07-03', 
@@ -344,7 +350,7 @@ db.Contrato.insertMany([
         Estado: 'Activo', 
         Tipo: 'Alquiler'},
     { 
-        
+        ID:4,
         ID_Cliente: 4, 
         ID_Automovil: 5, 
         Fecha_Inicio: '2023-07-04', 
@@ -353,7 +359,7 @@ db.Contrato.insertMany([
         Estado: 'Activo', 
         Tipo: 'Alquiler'},
     { 
-         
+        ID:5,
         ID_Cliente: 5, 
         ID_Automovil: 2, 
         Fecha_Inicio: '2023-07-05', 
@@ -362,7 +368,7 @@ db.Contrato.insertMany([
         Estado: 'Disponible', 
         Tipo: 'Alquiler'},
     { 
-        
+        ID:6,
         ID_Cliente: 2, 
         ID_Automovil: 1, 
         Fecha_Inicio: '2023-07-06', 
@@ -371,7 +377,7 @@ db.Contrato.insertMany([
         Tipo: 'Reserva'},
     { 
         
-        
+        ID:7,
         ID_Cliente: 3, 
         ID_Automovil: 3, 
         Fecha_Inicio: '2023-07-07', 
@@ -379,7 +385,7 @@ db.Contrato.insertMany([
         Estado: 'Pendiente', 
         Tipo: 'Reserva'},
     { 
-        
+        ID:8,
         ID_Cliente: 4, 
         ID_Automovil: 2, 
         Fecha_Inicio: '2023-07-08', 
@@ -387,6 +393,7 @@ db.Contrato.insertMany([
         Estado: 'Pendiente', 
         Tipo: 'Reserva'},
     { 
+        ID:9,
         ID_Cliente: 5, 
         ID_Automovil: 4, 
         Fecha_Inicio: '2023-07-09', 
@@ -394,6 +401,7 @@ db.Contrato.insertMany([
         Estado: 'Pendiente', 
         Tipo: 'Reserva'},
     { 
+        ID:10,
         ID_Cliente: 1, 
         ID_Automovil: 5, 
         Fecha_Inicio: '2023-07-10', 
@@ -402,7 +410,7 @@ db.Contrato.insertMany([
         Tipo: 'Reserva'},
 ]);
 
-//Registro(Union de ambos registros)
+
 
 
 use("db_campus_alquiler");

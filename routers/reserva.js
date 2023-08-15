@@ -52,4 +52,13 @@ appReserva.get("/",limitGrt(),async(req,res)=>{
     res.send(resul);
     
 });
+
+appReserva.get("/:id",limitGrt(),async(req,res)=>{
+    if (!req.rateLimit) return;
+    let id = Number(req.params.id);
+    let db = await con();
+    let collection = db.collection("Contrato");
+    let result = await collection.find({"ID":id, Tipo:"Alquiler"}).toArray();
+    res.send(result);
+});
 export default appReserva; 
